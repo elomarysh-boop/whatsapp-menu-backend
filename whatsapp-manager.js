@@ -3,10 +3,10 @@ import qrcode from 'qrcode-terminal';
 import { Boom } from '@hapi/boom';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { env } from '../config/env.js';
-import { logger } from '../utils/logger.js';
+import { env } from './env.js';
+import { logger } from './logger.js';
 import { OutboundQueue } from './outbound-queue.js';
-import { handleInboundMessage } from '../services/bot-service.js';
+import { handleInboundMessage } from './bot-service.js';
 
 export class WhatsAppManager {
   #clients = new Map();

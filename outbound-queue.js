@@ -1,5 +1,5 @@
-import { randomInt, sleep } from '../utils/helpers.js';
-import { env } from '../config/env.js';
+import { randomInt, sleep } from './helpers.js';
+import { env } from './env.js';
 
 export class OutboundQueue {
   #queues = new Map();

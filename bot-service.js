@@ -1,11 +1,11 @@
-import { getCategories, getCategoryByNumber, getProducts, getProductByNumber, insertOrder } from from './db/repositories.js';
-import { cartMessage, categoryMessage, checkoutMessage, prompts, welcomeMessage } frome from './domain/templates.js';
+import { getCategories, getCategoryByNumber, getProducts, getProductByNumber, insertOrder } from './repositories.js';
+import { cartMessage, categoryMessage, checkoutMessage, prompts, welcomeMessage } from './templates.js';
 
-import { parseCartItem, parseMenuNumber } from '../domain/parser.js';
-import { normalizePhone, normalizeText } from '../utils/helpers.js';
+import { parseCartItem, parseMenuNumber } from './parser.js';
+import { normalizePhone, normalizeText } from './helpers.js';
 import { SessionStore } from './session-store.js';
-import { env } from '../config/env.js';
-import { logger } from '../utils/logger.js';
+import { env } from './env.js';
+import { logger } from './logger.js';
 
 const sessions = new SessionStore();
 setInterval(() => sessions.clearExpired(), 10 * 60_000).unref();
