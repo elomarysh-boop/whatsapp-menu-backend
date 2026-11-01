@@ -31,7 +31,7 @@ async function createFinalOrder(store, jid, session, fulfillment) {
     fulfillment_type: fulfillment,
     items: session.cart,
     total_amount: total(session.cart),
-    currency: session.cart[0]?.currency ?? store.currency ?? 'ر.س',
+    currency: session.cart[0]?.currency ?? store.currency ?? 'ل.س',
     status: 'pending'
   });
   return order;
@@ -83,7 +83,7 @@ export async function handleInboundMessage({ store, message, send }) {
     }
     const existing = session.cart.find((i) => i.product_id === product.id);
     if (existing) existing.quantity = Math.min(99, existing.quantity + parsed.quantity);
-    else session.cart.push({ product_id: product.id, name: product.name, price: product.price, currency: product.currency ?? store.currency ?? 'ر.س', quantity: parsed.quantity });
+    else session.cart.push({ product_id: product.id, name: product.name, price: product.price, currency: product.currency ?? store.currency ?? 'ل.س', quantity: parsed.quantity });
     await send(`تمت إضافة ${product.name} × ${parsed.quantity} إلى السلة.\\n\\n${cartMessage(session.cart)}`);
     return;
   }

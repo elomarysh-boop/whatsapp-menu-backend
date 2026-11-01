@@ -12,7 +12,7 @@ export function normalizeText(value = '') {
   return value.trim().replace(/\\s+/g, ' ');
 }
 
-export function money(value, currency = 'ر.س') {
+export function money(value, currency = 'ل.س') {
   return `${Number(value).toFixed(2)} ${currency}`;
 }
 

@@ -11,7 +11,7 @@ export function categoryMessage(category, products) {
   const lines = [`قسم: ${category.name}`, ''];
   if (!products.length) lines.push('لا توجد منتجات متاحة حالياً.');
   products.forEach((product, index) => {
-    lines.push(`[${index + 1}] ${product.name} — ${money(product.price, product.currency ?? 'ر.س')}`);
+    lines.push(`[${index + 1}] ${product.name} — ${money(product.price, product.currency ?? 'ل.س')}`);
     if (product.description) lines.push(`    ${product.description}`);
   });
   lines.push('', 'للإضافة إلى السلة أرسل: رقم المنتج*الكمية', 'مثال: 10*2', '', '[4] السلة', '[5] الأقسام الرئيسية');
@@ -27,7 +27,7 @@ export function cartMessage(cart) {
     total += lineTotal;
     lines.push(`${index + 1}. ${item.name} × ${item.quantity} = ${money(lineTotal, item.currency)}`);
   });
-  lines.push('', `الإجمالي: ${money(total, cart[0].currency ?? 'ر.س')}`, '', 'أرسل [5] لإتمام الطلب أو [6] للعودة للأقسام.');
+  lines.push('', `الإجمالي: ${money(total, cart[0].currency ?? 'ل.س')}`, '', 'أرسل [5] لإتمام الطلب أو [6] للعودة للأقسام.');
   return lines.join('\\n');
 }
 
@@ -39,7 +39,7 @@ export function checkoutMessage(cart) {
     total += lineTotal;
     lines.push(`${index + 1}. ${item.name} × ${item.quantity} = ${money(lineTotal, item.currency)}`);
   });
-  lines.push('', `الإجمالي: ${money(total, cart[0]?.currency ?? 'ر.س')}`, '', '[7] التوصيل', '[8] الاستلام', '[9] إلغاء');
+  lines.push('', `الإجمالي: ${money(total, cart[0]?.currency ?? 'ل.س')}`, '', '[7] التوصيل', '[8] الاستلام', '[9] إلغاء');
   return lines.join('\\n');
 }
 

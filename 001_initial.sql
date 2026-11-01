@@ -4,7 +4,7 @@ create table if not exists public.stores (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   phone_number text not null unique,
-  currency text not null default 'ر.س',
+  currency text not null default 'ل.س',
   is_active boolean not null default true,
   created_at timestamptz not null default now()
 );
@@ -25,7 +25,7 @@ create table if not exists public.products (
   name text not null,
   description text,
   price numeric(12,2) not null check (price >= 0),
-  currency text not null default 'ر.س',
+  currency text not null default 'ل.س',
   sort_order integer not null default 0,
   is_active boolean not null default true
 );
@@ -40,7 +40,7 @@ create table if not exists public.orders (
   fulfillment_type text not null check (fulfillment_type in ('delivery','pickup')),
   items jsonb not null check (jsonb_typeof(items) = 'array'),
   total_amount numeric(12,2) not null check (total_amount >= 0),
-  currency text not null default 'ر.س',
+  currency text not null default 'ل.س',
   status text not null default 'pending' check (status in ('pending','confirmed','preparing','ready','completed','cancelled')),
   created_at timestamptz not null default now()
 );
@@ -56,3 +56,11 @@ alter table public.orders enable row level security;
 
 -- The backend uses the Supabase service role key server-side. Do not expose it to clients.
 -- Add dashboard-specific authenticated policies separately if a merchant admin UI is introduced.
+
+-- Convert existing default Saudi Riyal labels to Syrian Pound labels.
+alter table public.stores alter column currency set default 'ل.س';
+alter table public.products alter column currency set default 'ل.س';
+alter table public.orders alter column currency set default 'ل.س';
+update public.stores set currency = 'ل.س' where currency = 'ر.س';
+update public.products set currency = 'ل.س' where currency = 'ر.س';
+update public.orders set currency = 'ل.س' where currency = 'ر.س';
